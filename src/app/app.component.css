@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: darkcyan;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.navbar img {
+  height: 100px;
+  cursor: pointer;
+}
+
+.cart-button {
+  background-color: #007cc3;
+  padding: 15px;
+  height: 40px;  
+  cursor: pointer;
+  color: white; 
+}
+
+.cart-button img {
+   height: 40px;  
+}
+
+.cart-button:hover {
+  color: #71a3c0;
+}
+
+.content {
+  margin-top: 100px;
+  min-height: 100vh;
+}
+
+.footer {
+  /* absolute võtab elemendi DOM-st välja ja saab seda paigutada */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: -100px;
+  background-color: darkgrey;
+}

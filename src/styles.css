@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+* {
+  font-family: 'Noto Sans', sans-serif;
+  /* Angular pani automaatselt musta joone klikkimisel */
+  outline: none;
+}
+
+body {
+  /* Angular pani automaatselt 8px marginit igas suunas */
+  margin: 0;
+}
