@@ -1,1 +1,7 @@
-<p>cart works!</p>
+<div *ngFor="let item of cartItems; let i = index" >
+  <div>{{ item.title }}</div>
+  <div>{{ item.price }}</div>
+  <img src="{{ item.imgSrc }}">
+  <div>{{ item.category }}</div>
+  <div (click)="onDeleteFromCart(i)">X</div>
+</div>
