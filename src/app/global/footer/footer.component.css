@@ -1,0 +1,9 @@
+.footer {
+  /* absolute võtab elemendi DOM-st välja ja saab seda paigutada */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: -100px;
+  background-color: darkgrey;
+}

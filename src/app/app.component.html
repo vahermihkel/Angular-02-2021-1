@@ -1,24 +1,5 @@
-<!-- SININE - täägi nimetus (tag) -->
-<!-- HELESININE - htmli atribuudid -->
-<!-- ORANŽ - muutujad/klassid/failid/funktsioonid -->
-<!-- VALGE - kasutajatele nähtav (tekst) -->
-
-<div class="navbar">
-  <img routerLink="/" src="assets\webshio.png">
-  <div routerLink="cart" class="cart-button">
-    <img src="assets\shopping-cart.svg">
-    <span>0.00 €</span>
-  </div>  
-</div>
+<app-navbar></app-navbar>
 <div class="content">
   <router-outlet></router-outlet>
-  <!-- <h1>See on veebipood</h1>
-  <h2>Projekti raames tehtud</h2>
-  <h3>Tekst läheb aina väiksemaks</h3>
-  <h4>Header number 4</h4>
-  <p>Paragraph</p>
-  <button>VAJUTA NUPPU</button>
-  <a href="http://www.google.com" target="blank">MINE GOOGLE-sse</a>
-  <div routerLink="cart">MINE TEISELE LEHELE</div> -->
 </div>
-<div class="footer">FOOTER</div>
+<app-footer></app-footer>

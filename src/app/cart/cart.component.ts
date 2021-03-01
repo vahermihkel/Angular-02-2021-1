@@ -9,18 +9,31 @@ import { CartService } from './cart.service';
 })
 export class CartComponent implements OnInit {
   cartItems: Item[] = [];
+  sumOfCart: number = 0;
 
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.cartItems = this.cartService.cartItems;
-    console.log("Kasutaja läks cart component htmli peale");
-    console.log(this.cartItems);
+    this.calculateSumOfCart();
   }
 
   onDeleteFromCart(index: number) {
-    console.log(index);
-    console.log("kustutamisnupp töötab");
-    this.cartService.cartItems.splice(index,1)
+    this.cartService.cartItems.splice(index,1);
+    this.calculateSumOfCart();
   }
+
+  onEmptyCart() {
+    this.cartService.cartItems.splice(0);
+    this.calculateSumOfCart();
+  }
+
+  calculateSumOfCart() {
+    this.sumOfCart = 0;
+    this.cartItems.forEach(item => {
+      // this.sumOfCart = this.sumOfCart + item.price;
+      this.sumOfCart += item.price;
+    });
+  }
+
 }
