@@ -20,8 +20,7 @@ export class HomeComponent implements OnInit {
   }
 
   onAddToCart(cartItem: Item) {
-    console.log(cartItem);
     this.cartService.cartItems.push(cartItem);
-    console.log("Nupuvajutus töötab")
+    this.cartService.cartChanged.next(this.cartService.cartItems);
   }
 }

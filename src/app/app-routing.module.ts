@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddItemComponent } from './admin/add-item/add-item.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { EditItemComponent } from './admin/edit-item/edit-item.component';
+import { ViewItemsComponent } from './admin/view-items/view-items.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 
-// kandilised sulud on massiivide (listide) jaoks
-// listid koosnevad elementidest, mis on komaga eraldatud
-// elementide arv = komad + 1
-
-// objektid on loogeliste sulgudega, koosnevad võti-väärtus paaridest
-// võti-väärtus paarid on komaga eraldatud
-// kuju: VÕTI KOOLON VÄÄRTUS {võti: väärtus1, võti: väärtus2, võti: väärtus3}
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "cart", component: CartComponent},
+  { path: "admin", component: AdminHomeComponent},
+  { path: "admin/add-item", component: AddItemComponent},
+  { path: "admin/edit-item", component: EditItemComponent},
+  { path: "admin/items", component: ViewItemsComponent},
   { path: "**", redirectTo: ""}
 ];
 

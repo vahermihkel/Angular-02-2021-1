@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <label>Nimetus</label><br>
+    <input type="text" ngModel name="title" placeholder="Toote nimetus"><br>
+    <label>Pilt</label><br>
+    <input type="text" ngModel name="imgSrc" placeholder="Toote pilt"><br>
+    <label>Hind</label><br>
+    <input type="text" ngModel name="price" placeholder="Toote hind"><br>
+    <label>Kategooria</label><br>
+    <input type="text" ngModel name="category" placeholder="Toote kategooria"><br>
+    <button>Lisa ese</button>
+</form>
