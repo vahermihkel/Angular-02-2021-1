@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = this.itemService.itemsInService;
-    console.log("Kasutaja läks home component htmli peale")
   }
 
   onAddToCart(cartItem: Item) {

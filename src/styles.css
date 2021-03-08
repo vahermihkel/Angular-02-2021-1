@@ -12,3 +12,7 @@ body {
   /* Angular pani automaatselt 8px marginit igas suunas */
   margin: 0;
 }
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

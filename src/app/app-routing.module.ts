@@ -12,9 +12,9 @@ const routes: Routes = [
   { path: "cart", component: CartComponent},
   { path: "admin", component: AdminHomeComponent},
   { path: "admin/add-item", component: AddItemComponent},
-  { path: "admin/edit-item", component: EditItemComponent},
+  { path: "admin/edit-item/:itemId", component: EditItemComponent},
   { path: "admin/items", component: ViewItemsComponent},
-  { path: "**", redirectTo: ""}
+  // { path: "**", redirectTo: ""}
 ];
 
 @NgModule({
