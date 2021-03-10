@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
@@ -10,9 +10,9 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./edit-item.component.css']
 })
 export class EditItemComponent implements OnInit {
-  item: Item = new Item("",0,"","");
-  itemEditForm = new FormGroup({});
-  itemId: number = 0;
+  item!: Item;
+  itemEditForm!: FormGroup;
+  itemId!: number;
 
   constructor(private route: ActivatedRoute,
     private itemService: ItemService,

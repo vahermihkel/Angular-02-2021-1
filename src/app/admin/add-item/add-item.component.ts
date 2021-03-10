@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
 
@@ -10,7 +11,8 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class AddItemComponent implements OnInit {
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +26,7 @@ export class AddItemComponent implements OnInit {
         formValue.imgSrc,
         formValue.category);
       this.itemService.itemsInService.push(item);
+      this.router.navigateByUrl("/admin/items");
     } 
     // else {
     //   alert("VIGANE TOODE!");

@@ -1,0 +1,7 @@
+.filter-bar {
+    display: flex;
+}
+
+.filter-bar div {
+    margin-left: 10px;    
+}

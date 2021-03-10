@@ -1,8 +1,8 @@
 <div *ngFor="let item of items; let i = index" >
     <div>{{ item.title }}</div>
     <div>{{ item.price }}</div>
-    <img src="{{ item.imgSrc }}">
     <div>{{ item.category }}</div>
     <div (click)="onDeleteItem(i)">Kustuta ese</div>
     <div [routerLink]="['/admin/edit-item', i]">Muuda eset</div>
+    <br>
   </div>

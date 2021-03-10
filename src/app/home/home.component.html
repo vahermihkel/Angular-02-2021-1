@@ -1,5 +1,18 @@
 <!-- {{ items | json }} -->
 
+<br>
+
+<div routerLink="admin">Admin</div>
+<br>
+
+<div class="filter-bar">
+  <div>{{'Järjesta:' | translate }}</div>
+  <div (click)="onSortTitle()">{{'Tähestiku järgi' | translate}}</div>
+  <div (click)="onSortPrice()">Hinna järgi</div>
+</div>
+
+<br><br>
+
 <div *ngFor="let item of items" >
   <div>{{ item.title }}</div>
   <div>{{ item.price }}</div>
