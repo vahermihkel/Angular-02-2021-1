@@ -1,0 +1,27 @@
+input[type=text], input[type=number] {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+form {
+  position: relative;
+  top: -100px;
+  text-align: center;
+}
+
+.add {
+  margin: auto;
+  width: 100px;
+  height: 40px;
+}
+
+.add:disabled {
+  background-color: lightgray;
+  cursor: initial;
+}
+
+

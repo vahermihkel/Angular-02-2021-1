@@ -4,19 +4,20 @@
   *ngIf="cartItems.length > 0">
   Tühjenda ostukorv</div>
 
-<div *ngFor="let item of cartItems; let i = index" >
-  <div>{{ item.title }}</div>
-  <div>{{ item.price }}</div>
-  <img src="{{ item.imgSrc }}">
-  <div>{{ item.category }}</div>
-  <div (click)="onDeleteFromCart(i)">X</div>
+<div class="items-wrapper">
+  <div class="item" *ngFor="let item of cartItems; let i = index">
+    <img src="{{ item.imgSrc }}">
+    <div class="item-title">{{ item.title }}</div>
+    <div class="item-price">{{ item.price }} €</div>
+    <img (click)="onDeleteFromCart(i)" class="delete-from-cart-button" src="assets/bin.svg" alt="">
+  </div>
 </div>
 
 <div 
   class="sum-of-cart" 
   *ngIf="cartItems.length > 0">KOKKU: {{ sumOfCart.toFixed(2) }} €</div>
 
-<div *ngIf="cartItems.length == 0">
+<div class="empty-cart" *ngIf="cartItems.length == 0">
   <img src="assets/empty_cart.svg">
   <div>Ostukorv on tühi</div>
 </div>

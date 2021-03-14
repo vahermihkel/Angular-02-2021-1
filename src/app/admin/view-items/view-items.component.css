@@ -1,0 +1,36 @@
+.items-wrapper {
+  position: relative;
+  top: -100px;
+  padding: 10px;
+}
+
+.item {
+  width: 90%;
+  height: 70px;
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.item img {
+  width: 300px;
+  height: 250px;
+}
+
+.item-title, .item-price {
+  margin: 10px;
+}
+
+.change {
+  left: 750px;
+  top: -50px;
+  height: 50px;
+  width: 150px;
+}
+
+.delete {
+  left: 800px;
+  top: -50px;
+  height: 50px;
+  width: 150px;
+}
