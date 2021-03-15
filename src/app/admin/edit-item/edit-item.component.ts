@@ -37,6 +37,7 @@ export class EditItemComponent implements OnInit {
           form.value.price, 
           form.value.imgSrc,
           form.value.category);
+      this.itemService.saveItemsToDatabase();
       this.router.navigateByUrl("/admin/items");
     } 
     // else {
