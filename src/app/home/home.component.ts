@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = this.itemService.itemsInService.slice();
+    this.itemService.saveItemsToDatabase();
   }
 
   onSortTitle() {

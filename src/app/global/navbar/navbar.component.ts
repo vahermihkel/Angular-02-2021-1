@@ -21,10 +21,16 @@ export class NavbarComponent implements OnInit {
         this.sumOfCart += item.price;
       });
     })
+    let lang = localStorage.getItem("language");
+    // IFis saab vaadata true/false, aga ka kas on olemas või mitte
+    if (lang) {
+      this.useLanguage(lang);
+    }
   }
 
   useLanguage(language: string): void {
     this.translate.use(language);
+    localStorage.setItem("language", language);
   }
 
 }
