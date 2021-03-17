@@ -27,7 +27,7 @@ export class AddItemComponent implements OnInit {
         formValue.category);
       // this.itemService.itemsInService.push(item);
       this.itemService.addItemToDatabase(item);
-      this.router.navigateByUrl("/admin/items");
+      setTimeout(()=>this.router.navigateByUrl("/admin/items"),200);
     } 
     // else {
     //   alert("VIGANE TOODE!");

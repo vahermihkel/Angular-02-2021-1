@@ -38,7 +38,7 @@ export class EditItemComponent implements OnInit {
           form.value.imgSrc,
           form.value.category);
       this.itemService.saveItemsToDatabase();
-      this.router.navigateByUrl("/admin/items");
+      setTimeout(()=>this.router.navigateByUrl("/admin/items"),200);
     } 
     // else {
     //   alert("VIGANE TOODE!");
