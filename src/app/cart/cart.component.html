@@ -6,16 +6,17 @@
 
 <div class="items-wrapper">
   <div class="item" *ngFor="let item of cartItems; let i = index">
-    <img src="{{ item.imgSrc }}">
-    <div class="item-title">{{ item.title }}</div>
-    <div class="item-price">{{ item.price }} €</div>
+    <img src="{{ item.cartItem.imgSrc }}">
+    <div class="item-title">{{ item.cartItem.title }}</div>
+    <div>Kokku: {{ item.count }}</div>
+    <div class="item-price">{{ item.cartItem.price | thousandSeparator }} €</div>
     <img (click)="onDeleteFromCart(i)" class="delete-from-cart-button" src="assets/bin.svg" alt="">
   </div>
 </div>
 
 <div 
   class="sum-of-cart" 
-  *ngIf="cartItems.length > 0">KOKKU: {{ sumOfCart.toFixed(2) }} €</div>
+  *ngIf="cartItems.length > 0">KOKKU: {{ sumOfCart | thousandSeparator }} €</div>
 
 <div class="empty-cart" *ngIf="cartItems.length == 0">
   <img src="assets/empty_cart.svg">

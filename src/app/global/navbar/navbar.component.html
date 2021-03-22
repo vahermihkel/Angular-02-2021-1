@@ -6,6 +6,6 @@
   </div>
   <div routerLink="cart" class="cart-button">
     <img src="assets\shopping-cart.svg">
-    <span>{{ sumOfCart.toFixed(2) }} €</span>
+    <span>{{ sumOfCart | thousandSeparator }} €</span>
   </div>  
 </div>

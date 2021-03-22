@@ -6,9 +6,11 @@ import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { ViewItemsComponent } from './admin/view-items/view-items.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
+import { ViewComponent } from './item/view/view.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
+  { path: "view/:itemId", component: ViewComponent},
   { path: "cart", component: CartComponent},
   { path: "admin", component: AdminHomeComponent},
   { path: "admin/add-item", component: AddItemComponent},

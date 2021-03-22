@@ -69,15 +69,27 @@ export class HomeComponent implements OnInit {
   }
 
   onRemoveFromCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.title)
+    // {title: "PEALKIRI", price: 50, ...}
+    // [{title: "PEALKIRI", price: 49, ...},{title: "PEALKIRI", price: 50, ...},{title: "MUU", price: 50, ...}]
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title)
     if (i != -1) {
-      this.cartService.cartItems.splice(i,1);
-      this.cartService.cartChanged.next(this.cartService.cartItems);
+      if (this.cartService.cartItems[i].count == 1) {
+        this.cartService.cartItems.splice(i,1);
+      } else {
+        this.cartService.cartItems[i].count -= 1;
+      }
+      this.cartService.cartChanged.next(this.cartService.cartItems);      
     }   
   }
 
-  onAddToCart(cartItem: Item) {
-    this.cartService.cartItems.push(cartItem);
+  onAddToCart(item: Item) {
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title)
+    if (i != -1) {
+      this.cartService.cartItems[i].count += 1;
+    } else {
+      this.cartService.cartItems.push({cartItem: item, count: 1});
+    }
     this.cartService.cartChanged.next(this.cartService.cartItems);
   }
+  
 }

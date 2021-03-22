@@ -9,7 +9,10 @@ export class ShortenTitlePipe implements PipeTransform {
     if (!separateCount) {
       separateCount = 3;
     }
-    return value.split(' ').slice(0,separateCount).join(' ');
+    return value.split(' ').slice(0,separateCount).join(' '); // JS arrays
+    // Salomon --> ["S", "lomon"]
+    // Tere tere tallekesed head aega --> ["Tere", "tere", "tallekesed", "head", "aega"]
+    // slice(0,3)   ["Tere", "tere", "tallekesed"]
   }
 
 }
