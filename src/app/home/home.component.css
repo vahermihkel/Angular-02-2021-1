@@ -67,3 +67,7 @@
   .item:hover .add-to-cart-button {
     visibility: visible;   
    }
+
+  .category-active {
+    font-weight: 600;
+  }

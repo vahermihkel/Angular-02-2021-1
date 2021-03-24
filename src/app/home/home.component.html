@@ -5,8 +5,9 @@
 
 <!-- | json -->
 
-<div *ngFor="let item of items | uniqueCategory">
-    {{ item }}
+<div *ngFor="let category of itemsOriginal | uniqueCategory; let i = index">
+  <input hidden id="{{category}}" (click)="onSelectCategory(i)" type="checkbox">
+  <label for="{{category}}" [ngClass]="{'category-active': itemCategories[i].isSelected}">{{ category }}</label>
 </div>
 
 <div class="filter-bar">
@@ -16,7 +17,7 @@
 </div>
 
 <div class="items-wrapper">
-  <div class="item" *ngFor="let item of items; let i = index">
+  <div class="item" *ngFor="let item of itemsShown; let i = index">
     <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
     <div class="add-to-cart-button-wrapper">
       <div class="add-to-cart-button">
@@ -29,3 +30,7 @@
     <div class="item-price">{{ item.price | thousandSeparator }} €</div>
   </div>
 </div>
+
+<div *ngIf="itemsShown.length == 0 && !isLoading">Ühtegi kategooriat pole valitud, vali sobiv kategooria!</div>
+
+<app-spinner *ngIf="isLoading"></app-spinner>
