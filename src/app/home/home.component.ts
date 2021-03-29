@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CheckAuthService } from '../auth/check-auth.service';
 import { CartService } from '../cart/cart.service';
 import { Item } from '../models/item.model';
 import { UniqueCategoryPipe } from '../pipes/unique-category.pipe';
@@ -20,9 +21,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private itemService: ItemService,
-    private uniqueCategoryPipe: UniqueCategoryPipe) { }
+    private uniqueCategoryPipe: UniqueCategoryPipe,
+    private checkAuth: CheckAuthService) { }
 
   ngOnInit(): void {
+    this.checkAuth.autologin();
     this.isLoading = true;
     this.itemService.getItemsFromDatabase().subscribe(itemsFromFirebase => {
       this.itemsOriginal = [];

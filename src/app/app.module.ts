@@ -21,6 +21,8 @@ import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 import { ViewComponent } from './item/view/view.component';
 import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,7 +43,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShortenTitlePipe,
     ViewComponent,
     UniqueCategoryPipe,
-    SpinnerComponent
+    SpinnerComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

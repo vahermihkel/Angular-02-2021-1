@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CheckAuthService } from 'src/app/auth/check-auth.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private checkAuth: CheckAuthService) { }
 
   ngOnInit(): void {
+    this.checkAuth.autologin();
   }
 
 }

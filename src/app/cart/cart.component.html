@@ -8,8 +8,11 @@
   <div class="item" *ngFor="let item of cartItems; let i = index">
     <img src="{{ item.cartItem.imgSrc }}">
     <div class="item-title">{{ item.cartItem.title }}</div>
-    <div>Kokku: {{ item.count }}</div>
     <div class="item-price">{{ item.cartItem.price | thousandSeparator }} €</div>
+    <span (click)="onRemoveFromCart(item.cartItem)">-</span>
+    <div>{{ item.count }} tk</div>
+    <span (click)="onAddToCart(item.cartItem)">+</span>
+    <div>{{ item.count * item.cartItem.price }} €</div>
     <img (click)="onDeleteFromCart(i)" class="delete-from-cart-button" src="assets/bin.svg" alt="">
   </div>
 </div>
