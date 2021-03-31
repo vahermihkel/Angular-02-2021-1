@@ -9,5 +9,11 @@
     <input type="number" ngModel name="price" placeholder="Toote hind" required><br>
     <label>Kategooria</label><br>
     <input type="text" ngModel name="category" placeholder="Toote kategooria" required><br>
+    <label>Ribakood</label><br>
+    <input type="number" ngModel name="barcode" placeholder="Toote ribakood" required><br>
+    <label>Kirjeldus</label><br>
+    <input type="text" ngModel name="description" placeholder="Toote kirjeldus" required><br>
+    <label>Päritolumaa</label><br>
+    <input type="text" ngModel name="producer" placeholder="Toote päritolumaa" required><br>
     <button class="main-button add" [disabled]="addItemForm.invalid" type="submit">Lisa ese</button>
 </form>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { CheckAuthService } from '../auth/check-auth.service';
 import { CartService } from '../cart/cart.service';
 import { Item } from '../models/item.model';
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
   constructor(private cartService: CartService,
     private itemService: ItemService,
     private uniqueCategoryPipe: UniqueCategoryPipe,
-    private checkAuth: CheckAuthService) { }
+    private checkAuth: CheckAuthService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.checkAuth.autologin();
@@ -107,7 +109,8 @@ export class HomeComponent implements OnInit {
       } else {
         this.cartService.cartItems[i].count -= 1;
       }
-      this.cartService.cartChanged.next(this.cartService.cartItems);      
+      this.cartService.cartChanged.next(this.cartService.cartItems);
+      this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );      
     }   
   }
 
@@ -119,6 +122,7 @@ export class HomeComponent implements OnInit {
       this.cartService.cartItems.push({cartItem: item, count: 1});
     }
     this.cartService.cartChanged.next(this.cartService.cartItems);
+    this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );
   }
   
 }

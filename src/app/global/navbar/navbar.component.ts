@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CheckAuthService } from 'src/app/auth/check-auth.service';
 import { CartService } from 'src/app/cart/cart.service';
@@ -16,9 +17,20 @@ export class NavbarComponent implements OnInit {
   constructor(private cartService: CartService,
     private translate: TranslateService,
     private checkAuth: CheckAuthService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    let cartValue = this.cookieService.get('cart');
+    // console.log(cartValue);
+    // console.log(JSON.parse(cartValue));
+    this.cartService.cartItems = JSON.parse(cartValue);
+    this.sumOfCart = 0;
+    this.cartService.cartItems.forEach(item => {
+      // this.sumOfCart = this.sumOfCart + item.price;
+      this.sumOfCart += item.cartItem.price * item.count;
+    });
+
     this.checkAuth.autologin();
     this.checkAuth.loggedIn.subscribe(logged => {
       this.isLoggedIn = logged;

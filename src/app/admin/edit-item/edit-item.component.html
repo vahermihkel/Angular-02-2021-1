@@ -9,5 +9,11 @@
     <input type="number" formControlName="price" placeholder="Toote hind" required><br>
     <label>Kategooria</label><br>
     <input type="text" formControlName="category" placeholder="Toote kategooria" required><br>
+    <label>Ribakood</label><br>
+    <input type="number" formControlName="barcode" placeholder="Toote ribakood" required><br>
+    <label>Kirjeldus</label><br>
+    <input type="text" formControlName="description" placeholder="Toote kirjeldus" required><br>
+    <label>Päritolumaa</label><br>
+    <input type="text" formControlName="producer" placeholder="Toote päritolumaa" required><br>
     <button class="main-button add" [disabled]="itemEditForm.invalid" type="submit">Muuda eset</button>
 </form>

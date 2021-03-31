@@ -12,7 +12,7 @@
     <span (click)="onRemoveFromCart(item.cartItem)">-</span>
     <div>{{ item.count }} tk</div>
     <span (click)="onAddToCart(item.cartItem)">+</span>
-    <div>{{ item.count * item.cartItem.price }} €</div>
+    <div>{{ item.count * item.cartItem.price | thousandSeparator }} €</div>
     <img (click)="onDeleteFromCart(i)" class="delete-from-cart-button" src="assets/bin.svg" alt="">
   </div>
 </div>

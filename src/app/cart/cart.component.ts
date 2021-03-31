@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Item } from '../models/item.model';
 import { CartService } from './cart.service';
 
@@ -11,7 +12,8 @@ export class CartComponent implements OnInit {
   cartItems: {cartItem: Item, count: number}[] = [];
   sumOfCart: number = 0;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.cartItems = this.cartService.cartItems;
@@ -20,13 +22,11 @@ export class CartComponent implements OnInit {
 
   onDeleteFromCart(index: number) {
     this.cartService.cartItems.splice(index,1);
-    this.cartService.cartChanged.next(this.cartService.cartItems);
     this.calculateSumOfCart();
   }
 
   onEmptyCart() {
     this.cartService.cartItems.splice(0);
-    this.cartService.cartChanged.next(this.cartService.cartItems);
     this.calculateSumOfCart();
   }
 
@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
       } else {
         this.cartService.cartItems[i].count -= 1;
       }
-      this.cartService.cartChanged.next(this.cartService.cartItems);      
+      this.calculateSumOfCart();      
     }   
   }
 
@@ -51,7 +51,7 @@ export class CartComponent implements OnInit {
     } else {
       this.cartService.cartItems.push({cartItem: item, count: 1});
     }
-    this.cartService.cartChanged.next(this.cartService.cartItems);
+    this.calculateSumOfCart();
   }
 
   calculateSumOfCart() {
@@ -60,6 +60,8 @@ export class CartComponent implements OnInit {
       // this.sumOfCart = this.sumOfCart + item.price;
       this.sumOfCart += item.cartItem.price * item.count;
     });
+    this.cartService.cartChanged.next(this.cartService.cartItems);
+    this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );     
   }
 
 }
