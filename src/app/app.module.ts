@@ -24,6 +24,7 @@ import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ItemCardComponent } from './item/item-card/item-card.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -46,7 +47,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UniqueCategoryPipe,
     SpinnerComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ItemCardComponent
   ],
   imports: [
     BrowserModule,

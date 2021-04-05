@@ -17,10 +17,16 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent},
   { path: "view/:itemId", component: ViewComponent},
   { path: "cart", component: CartComponent},
-  { path: "admin", component: AdminHomeComponent, canActivate: [AuthGuard]},
-  { path: "admin/add-item", component: AddItemComponent, canActivate: [AuthGuard]},
-  { path: "admin/edit-item/:itemId", component: EditItemComponent, canActivate: [AuthGuard]},
-  { path: "admin/items", component: ViewItemsComponent, canActivate: [AuthGuard]},
+
+  { path: "admin", canActivate: [AuthGuard], children: [
+    { path: "", component: AdminHomeComponent },
+    { path: "add-item", component: AddItemComponent },
+    { path: "edit-item/:itemId", component: EditItemComponent },
+    { path: "items", component: ViewItemsComponent },
+  ]},
+
+
+
   // { path: "**", redirectTo: ""}
 ];
 
