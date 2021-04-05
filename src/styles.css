@@ -33,3 +33,7 @@ body {
 input.ng-invalid.ng-touched {
   border: 1px solid red !important;
 }
+
+.item:hover .add-to-cart-button {
+  visibility: visible;   
+ }

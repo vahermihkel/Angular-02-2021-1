@@ -29,6 +29,8 @@ export class EditItemComponent implements OnInit {
       barcode: new FormControl(this.item.barcode),
       producer: new FormControl(this.item.producer),
       description: new FormControl(this.item.description),
+      isActive: new FormControl(this.item.isActive),
+      size: new FormControl(this.item.size),
     });
   }
 
@@ -42,9 +44,13 @@ export class EditItemComponent implements OnInit {
           form.value.category,
           form.value.barcode,
           form.value.producer,
-          form.value.description);
-      this.itemService.saveItemsToDatabase();
-      setTimeout(()=>this.router.navigateByUrl("/admin/items"),200);
+          form.value.description,
+          form.value.isActive,
+          form.value.size);
+      this.itemService.saveItemsToDatabase().subscribe(() =>
+        this.router.navigateByUrl("/admin/items")
+      );
+      // setTimeout(()=>this.router.navigateByUrl("/admin/items"),200);
     } 
     // else {
     //   alert("VIGANE TOODE!");

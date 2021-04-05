@@ -10,10 +10,14 @@
     <label>Kategooria</label><br>
     <input type="text" formControlName="category" placeholder="Toote kategooria" required><br>
     <label>Ribakood</label><br>
-    <input type="number" formControlName="barcode" placeholder="Toote ribakood" required><br>
+    <input type="number" formControlName="barcode" placeholder="Toote ribakood"><br>
     <label>Kirjeldus</label><br>
-    <input type="text" formControlName="description" placeholder="Toote kirjeldus" required><br>
+    <input type="text" formControlName="description" placeholder="Toote kirjeldus"><br>
     <label>Päritolumaa</label><br>
-    <input type="text" formControlName="producer" placeholder="Toote päritolumaa" required><br>
+    <input type="text" formControlName="producer" placeholder="Toote päritolumaa"><br>
+    <label>Suurus</label><br>
+    <input type="text" formControlName="size" placeholder="Toote päritolumaa"><br>
+    <label>Toode aktiivne</label>
+    <input type="checkbox" formControlName="isActive"><br>
     <button class="main-button add" [disabled]="itemEditForm.invalid" type="submit">Muuda eset</button>
 </form>

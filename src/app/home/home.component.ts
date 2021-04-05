@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   priceSortNumber = 0;
   itemCategories!: {category: string, isSelected: boolean}[];
   isLoading = false;
+  isLoggedIn = false;
   // kuupaev = new Date();
 
   constructor(private itemService: ItemService,
@@ -24,6 +25,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAuth.autologin();
+    this.checkAuth.loggedIn.subscribe(logged => {
+      this.isLoggedIn = logged;
+    });
+    this.isLoggedIn = this.checkAuth.isLoggedIn();
     this.isLoading = true;
     this.itemService.getItemsFromDatabase().subscribe(itemsFromFirebase => {
       this.itemsOriginal = [];
@@ -96,5 +101,11 @@ export class HomeComponent implements OnInit {
   }
 
   
+  itemActiveChange(item: Item) {
+    let i = this.itemsOriginal.findIndex(itemOrig => item.title == itemOrig.title);
+    this.itemsOriginal[i] = item; // lehel näitamise jaoks
+    this.itemService.itemsInService[i] = item; // andmebaasi sisestamise jaoks
+    this.itemService.saveItemsToDatabase().subscribe();
+  }
   
 }

@@ -15,5 +15,14 @@
     <input type="text" ngModel name="description" placeholder="Toote kirjeldus" required><br>
     <label>Päritolumaa</label><br>
     <input type="text" ngModel name="producer" placeholder="Toote päritolumaa" required><br>
+
+
+    <label>Suurus</label><br>
+    <span *ngFor="let size of sizes">
+        <label>{{size}}</label>
+        <input type="checkbox" ngModel name="size">
+    </span>
+
+    <br>
     <button class="main-button add" [disabled]="addItemForm.invalid" type="submit">Lisa ese</button>
 </form>

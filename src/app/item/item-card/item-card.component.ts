@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Item } from 'src/app/models/item.model'; // ABS path - alates algusest
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from '../../cart/cart.service'; // REL path - sellest kohast
+import { CheckAuthService } from 'src/app/auth/check-auth.service';
 
 @Component({
   selector: 'app-item-card',
@@ -11,11 +12,24 @@ import { CartService } from '../../cart/cart.service'; // REL path - sellest koh
 export class ItemCardComponent implements OnInit {
   @Input() item!: Item;
   @Input() i!: number;
+  @Output() itemActiveChanged = new EventEmitter(); 
+  isLoggedIn = false;
 
   constructor(private cartService: CartService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private checkAuth: CheckAuthService) { }
 
   ngOnInit(): void {
+    this.checkAuth.autologin();
+    this.checkAuth.loggedIn.subscribe(logged => {
+      this.isLoggedIn = logged;
+    });
+    this.isLoggedIn = this.checkAuth.isLoggedIn();
+  }
+
+  onItemActive() {
+    this.item.isActive = !this.item.isActive;
+    this.itemActiveChanged.emit(this.item);
   }
 
   onRemoveFromCart(item: Item) {

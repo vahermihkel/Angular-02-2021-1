@@ -16,7 +16,7 @@ export class ItemService {
 
   // Asendab andmebaasis kõik ära selle väärtusega mis kaasa anname
   saveItemsToDatabase() {
-    this.http.put(this.url, this.itemsInService).subscribe();
+    return this.http.put(this.url, this.itemsInService);
   }
 
   // Võtab kõik andmebaasist - by default tüüp on tal Object. <TÜÜP> anname oma tüübi
@@ -26,14 +26,15 @@ export class ItemService {
 
   // Lisab andmebaasi selle väärtuse mis kaasa anname - paneb ülejäänule
   addItemToDatabase(item: Item) {
-    this.http.post(this.url, item).subscribe(
-    //   response => {
-    //   console.log("õnnestus")
-    // },
-    // error=> {
-    //   console.log("ei õnnestunud!")
-    // }
-    );
+    return this.http.post(this.url, item);
+    // .subscribe(
+    // //   response => {
+    // //   console.log("õnnestus")
+    // // },
+    // // error=> {
+    // //   console.log("ei õnnestunud!")
+    // // }
+    // );
   }
 }
 
