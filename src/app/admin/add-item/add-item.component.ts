@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CheckAuthService } from 'src/app/auth/check-auth.service';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
+import { SizeService } from '../size-item/size.service';
 
 @Component({
   selector: 'app-add-item',
@@ -11,15 +12,32 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
-  sizes = ["34", "35", "36", "37", "38", "39"]
+  sizes: string[] = [];
+  itemSizes: string[] = [];
 
   constructor(private itemService: ItemService,
     private router: Router,
-    private checkAuth: CheckAuthService) { }
+    private checkAuth: CheckAuthService,
+    private sizeService: SizeService) { }
 
   ngOnInit(): void {
+    this.itemSizes = [];
     this.checkAuth.autologin();
+    this.sizes = this.sizeService.sizes;
   }
+
+  onSizeChanged(size: string, event: Event) {
+    let isChecked = (<HTMLInputElement>event.target).checked;
+    if(isChecked) {
+      this.itemSizes.push(size);
+    } else {
+      let i = this.itemSizes.indexOf(size);
+      this.itemSizes.splice(i,1);
+    }
+  }
+
+  // itemSizes = []
+  // vajutatakse "39"  -   itemSizes = ["39"]
 
   onSubmit(form: NgForm) {
     console.log(form.value);
@@ -34,7 +52,7 @@ export class AddItemComponent implements OnInit {
         formValue.producer,
         formValue.description,
         true,
-        formValue.size);
+        this.itemSizes);
       // this.itemService.itemsInService.push(item);
       this.itemService.addItemToDatabase(item).subscribe(()=>
         this.router.navigateByUrl("/admin/items")

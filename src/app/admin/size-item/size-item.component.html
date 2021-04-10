@@ -1,0 +1,21 @@
+<label>Lisa uus suurus</label><br>
+<!-- two way binding -->
+<input type="text" [(ngModel)]="size"><br>
+<button (click)="onAddSize()">Sisesta</button><br>
+
+<!-- {{ size }} -->
+
+<!-- <form (ngSubmit)="onSubmit(addSizeForm)" #addSizeForm="ngForm">
+<label>Lisa uus suurus</label><br>
+two way binding
+<input type="text" ngModel name="size"><br>
+<button>Sisesta</button><br>
+</form> -->
+
+
+
+
+
+<span *ngFor="let size of sizes; let i = index">
+  <div>{{size}}</div><button (click)="onDeleteSize(i)">X</button>
+</span><br>

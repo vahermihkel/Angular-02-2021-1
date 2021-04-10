@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddItemComponent } from './admin/add-item/add-item.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { EditItemComponent } from './admin/edit-item/edit-item.component';
+import { SizeItemComponent } from './admin/size-item/size-item.component';
 import { ViewItemsComponent } from './admin/view-items/view-items.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: "add-item", component: AddItemComponent },
     { path: "edit-item/:itemId", component: EditItemComponent },
     { path: "items", component: ViewItemsComponent },
+    { path: "sizes", component: SizeItemComponent },
   ]},
 
 

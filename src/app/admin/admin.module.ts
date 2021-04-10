@@ -8,7 +8,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemModule } from '../item/item.module';
-
+import { SizeItemComponent } from './size-item/size-item.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { ViewCategoriesComponent } from './category/view-categories/view-categories.component';
 
 
 @NgModule({
@@ -17,6 +19,9 @@ import { ItemModule } from '../item/item.module';
     EditItemComponent,
     ViewItemsComponent,
     AdminHomeComponent,
+    SizeItemComponent,
+    AddCategoryComponent,
+    ViewCategoriesComponent,
   ],
   imports: [
     CommonModule,

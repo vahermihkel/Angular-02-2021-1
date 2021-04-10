@@ -20,7 +20,7 @@
     <label>Suurus</label><br>
     <span *ngFor="let size of sizes">
         <label>{{size}}</label>
-        <input type="checkbox" ngModel name="size">
+        <input type="checkbox" (change)="onSizeChanged(size, $event)">
     </span>
 
     <br>

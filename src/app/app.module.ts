@@ -36,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SpinnerComponent,
     LoginComponent,
     SignupComponent,
-    ShowActiveItemsPipe
+    ShowActiveItemsPipe,
   ],
   imports: [
     BrowserModule,
