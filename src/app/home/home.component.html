@@ -5,29 +5,33 @@
 
 <!-- | json -->
 
-<div *ngFor="let category of itemsOriginal | uniqueCategory; let i = index">
-  <input hidden id="{{category}}" (click)="onSelectCategory(i)" type="checkbox">
-  <label for="{{category}}" [ngClass]="{'category-active': itemCategories[i].isSelected}">{{ category }}</label>
+<div class="sidenav">
+  <div *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory; let i = index">
+    <input hidden id="{{category}}" (click)="onSelectCategory(i)" type="checkbox">
+    <label for="{{category}}" [ngClass]="{'category-active': itemCategories[i].isSelected}">{{ category }}</label>
+  </div>
 </div>
 
-<div class="filter-bar">
-  <div class="filter-name">{{'Järjesta:' | translate  }}</div>
-  <div class="filter-value price" (click)="onSortTitle()">{{'Tähestiku järgi' | translate}}</div>
-  <div class="filter-value title" (click)="onSortPrice()">Hinna järgi</div>
+<div class="main">
+  <div class="filter-bar">
+    <div class="filter-name">{{'Järjesta:' | translate  }}</div>
+    <div class="filter-value price" (click)="onSortTitle()">{{'Tähestiku järgi' | translate}}</div>
+    <div class="filter-value title" (click)="onSortPrice()">Hinna järgi</div>
+  </div>
+
+  <div class="items-wrapper">
+    <app-item-card 
+      class="item" 
+      *ngFor="let itemShown of itemsShown | showActiveItems:isLoggedIn; let i = index"
+      [item]="itemShown"
+      [i]="i"
+      (itemActiveChanged)="itemActiveChange($event)"
+      >
+      
+    </app-item-card>
+  </div>
+
+  <div *ngIf="itemsShown.length == 0 && !isLoading">Ühtegi kategooriat pole valitud, vali sobiv kategooria!</div>
+
+  <app-spinner *ngIf="isLoading"></app-spinner>
 </div>
-
-<div class="items-wrapper">
-  <app-item-card 
-    class="item" 
-    *ngFor="let itemShown of itemsShown | showActiveItems:isLoggedIn; let i = index"
-    [item]="itemShown"
-    [i]="i"
-    (itemActiveChanged)="itemActiveChange($event)"
-    >
-    
-  </app-item-card>
-</div>
-
-<div *ngIf="itemsShown.length == 0 && !isLoading">Ühtegi kategooriat pole valitud, vali sobiv kategooria!</div>
-
-<app-spinner *ngIf="isLoading"></app-spinner>

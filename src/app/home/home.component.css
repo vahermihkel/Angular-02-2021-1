@@ -24,3 +24,32 @@
     border: 1px solid gray;
     padding-bottom: 20px;
   }
+
+  .sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    padding-top: 150px;
+  }
+  
+  .sidenav label {
+    padding: 6px 8px 6px 16px;
+    font-size: 25px;
+    display: block;
+  }
+  
+  .sidenav label:hover {
+    cursor: pointer;
+    color: black;
+  }
+  
+  .main {
+    margin-left: 160px; 
+    /* font-size: 28px;  */
+    padding: 0px 10px;
+  }
+
+  .category-active {
+    font-weight: 600;
+  }

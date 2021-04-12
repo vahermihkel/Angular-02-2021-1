@@ -1,7 +1,20 @@
-{{ item | json }}
+<div *ngIf="item" class="panel">
+  <img class="item-img" src="{{ item.imgSrc }}">
+  <div>
+    <h1 class="item-title">{{ item.title | translate | shortenTitle }}</h1>
+    <div class="item-price">{{ item.price | thousandSeparator }} €</div>
 
-<div class="add-to-cart-button">
-  <span (click)="onRemoveFromCart(item)">-</span>
-  <span>___</span>
-  <span (click)="onAddToCart(item)">+</span>
+    <select [(ngModel)]="cartSize" *ngIf="item.size">
+      <option value="" disabled selected>Vali suurus</option>
+      <option [value]="size" *ngFor="let size of item.size">{{ size }}</option>
+    </select>
+
+    <div class="add-to-cart-button-wrapper">
+      <div class="add-to-cart-button">
+        <span (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>
+        <span>___</span>
+        <span [ngClass]="{'size-not-selected': cartSize == ''}" (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
+      </div>
+    </div>
+  </div>
 </div>

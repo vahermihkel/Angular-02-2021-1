@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
+import { CategoryService } from '../category/category.service';
 import { SizeService } from '../size-item/size.service';
 
 @Component({
@@ -17,29 +18,49 @@ export class EditItemComponent implements OnInit {
   sizes: string[] = [];
   itemSizes: string[] = [];
   isItemSizesChecked: {size: string, checked: boolean}[] = [];
-  isItemSizesChecked2: {size: string, checked: boolean}[] = [];
+  // isItemSizesChecked2: {size: string, checked: boolean}[] = [];
+  categories: {categoryName: string}[] = [];
 
   constructor(private route: ActivatedRoute,
     private itemService: ItemService,
     private router: Router,
-    private sizeService: SizeService) { }
+    private sizeService: SizeService,
+    private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.itemService.getItemsFromDatabase().subscribe(items => {
+      this.itemService.itemsInService = [];
+      for (const key in items) {
+          const element = items[key];
+          this.itemService.itemsInService.push(element);
+      }
+    })
+
+
+
+
+
+
+
+
+    this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
+      for (const key in categoriesFromFb) {
+        const element = categoriesFromFb[key];
+        this.categories.push({categoryName: element.categoryName});
+    }
+    });
+
     this.sizes = this.sizeService.sizes;
     this.itemId = (Number)(this.route.snapshot.paramMap.get("itemId"));
     this.item = this.itemService.itemsInService[this.itemId];
-    this.itemSizes = this.item.size;
-    this.isItemSizesChecked = this.sizes.map(size => {return{size:size, checked: false}});
-    this.isItemSizesChecked.map(obj => {
-      this.sizes.forEach(size=>{
-        if (obj.size == size) {
-          this.isItemSizesChecked2.push({size: size, checked: true})
-        } else {
-          this.isItemSizesChecked2.push({size: size, checked: false})
-        }
-      })
-    })
-    console.log(this.isItemSizesChecked2);
+
+    if (this.item.size) {
+      this.itemSizes = this.item.size;
+      this.isItemSizesChecked = this.sizes.map(size=>({size: size, checked: this.itemSizes.includes(size)}));
+    } else {
+      this.isItemSizesChecked = this.sizes.map(size=>({size: size, checked: false}));
+    }
+   
     this.itemEditForm = new FormGroup({
       title: new FormControl(this.item.title),
       price: new FormControl(this.item.price),

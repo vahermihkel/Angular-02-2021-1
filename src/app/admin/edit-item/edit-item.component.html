@@ -1,6 +1,6 @@
 <button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
 
-<form (ngSubmit)="onSubmit(itemEditForm)" [formGroup]="itemEditForm">
+<form *ngIf="itemEditForm" (ngSubmit)="onSubmit(itemEditForm)" [formGroup]="itemEditForm">
     <label>Nimetus</label><br>
     <input type="text" formControlName="title" placeholder="Toote nimetus" required><br>
     <label>Pilt</label><br>
@@ -8,7 +8,15 @@
     <label>Hind</label><br>
     <input type="number" formControlName="price" placeholder="Toote hind" required><br>
     <label>Kategooria</label><br>
-    <input type="text" formControlName="category" placeholder="Toote kategooria" required><br>
+    <!-- <input type="text" formControlName="category" placeholder="Toote kategooria" required><br> -->
+
+    <select formControlName="category">
+        <option disabled value="">Vali kategooria</option>
+        <option *ngFor="let category of categories" [value]="category.categoryName">  
+            {{category.categoryName}}
+        </option> 
+    </select>
+
     <label>Ribakood</label><br>
     <input type="number" formControlName="barcode" placeholder="Toote ribakood"><br>
     <label>Kirjeldus</label><br>
@@ -22,9 +30,9 @@
    
    
     <label>Suurus</label><br>
-    <span *ngFor="let size of sizes; let i = index">
-        <label>{{size}}</label>
-        <input type="checkbox" [checked]="true" (change)="onSizeChanged(size, $event)">
+    <span *ngFor="let item of isItemSizesChecked; let i = index">
+        <label>{{item.size}}</label>
+        <input type="checkbox" [checked]="item.checked" (change)="onSizeChanged(item.size, $event)">
     </span>
    
     <br>

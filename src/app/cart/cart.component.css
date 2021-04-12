@@ -3,7 +3,9 @@
 }
 
 .empty-cart-button {
-  margin-right: 10%;
+  position: absolute;
+  right: 10%;
+  top: 120px;
   float: right;
   color: #007cc3;
   background: 0 0;
@@ -21,18 +23,32 @@
   border-bottom: 1px solid lightgray;
 }
 
+.item-img {
+  height: 100px;
+  width: 100px;
+}
+
 .item-title {
-  width: 500px;
-  margin-top: 40px;
+  width: 300px;
+  margin-top: 20px;
+}
+
+.add-to-cart-button {
+  margin-top: 20px;
+  display: flex;
+}
+
+.add-to-cart-button div {
+  margin-top: 12px;
 }
 
 .item-price {
   width: 70px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .delete-from-cart-button {
-  margin-top: 70px;
+  margin-top: 20px;
   height: 40px;
   width: 40px;
   cursor: pointer;

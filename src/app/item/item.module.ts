@@ -6,6 +6,7 @@ import { ItemCardComponent } from './item-card/item-card.component';
 import { ViewComponent } from './view/view.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     AppRoutingModule,
-    TranslateModule
+    TranslateModule,
+    FormsModule
   ],
   exports: [
     ItemCardComponent,

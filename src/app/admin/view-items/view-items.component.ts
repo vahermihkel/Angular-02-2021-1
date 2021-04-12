@@ -15,9 +15,7 @@ export class ViewItemsComponent implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit(): void {
-    // this.items = this.itemService.itemsInService;
     this.itemService.getItemsFromDatabase().subscribe(items => {
-      console.log("OLEN VÕTMAS UUSI ESEMEID");
       this.items = [];
       this.itemService.itemsInService = [];
       for (const key in items) {
@@ -25,9 +23,7 @@ export class ViewItemsComponent implements OnInit {
           this.items.push(element);
           this.itemService.itemsInService.push(element);
       }
-      // this.itemService.itemsInService = items;
     })
-    console.log("TÖÖTLEN NEID ESEMEID");
   }
 
   onDeleteItem(i: number) {

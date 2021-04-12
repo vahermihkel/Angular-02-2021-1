@@ -18,7 +18,7 @@ export class CartService {
   //]
 
   // [{cartItem: Item, count: 1},...]
-  cartItems: {cartItem: Item, count: number}[] = [];
+  cartItems: {cartItem: Item, cartSize: string, count: number}[] = [];
   cartChanged = new Subject<{cartItem: Item, count: number}[]>();
 
   constructor() { }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CheckAuthService } from 'src/app/auth/check-auth.service';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
+import { CategoryService } from '../category/category.service';
 import { SizeService } from '../size-item/size.service';
 
 @Component({
@@ -14,13 +15,21 @@ import { SizeService } from '../size-item/size.service';
 export class AddItemComponent implements OnInit {
   sizes: string[] = [];
   itemSizes: string[] = [];
+  categories: {categoryName: string}[] = [];
 
   constructor(private itemService: ItemService,
     private router: Router,
     private checkAuth: CheckAuthService,
-    private sizeService: SizeService) { }
+    private sizeService: SizeService,
+    private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
+      for (const key in categoriesFromFb) {
+        const element = categoriesFromFb[key];
+        this.categories.push({categoryName: element.categoryName});
+    }
+    });
     this.itemSizes = [];
     this.checkAuth.autologin();
     this.sizes = this.sizeService.sizes;
