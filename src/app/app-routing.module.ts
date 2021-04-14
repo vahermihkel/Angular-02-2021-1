@@ -17,7 +17,6 @@ import { ViewComponent } from './item/view/view.component';
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "login", component: LoginComponent},
-  { path: "signup", component: SignupComponent},
   { path: "view/:itemId", component: ViewComponent},
   { path: "cart", component: CartComponent},
 
@@ -29,6 +28,7 @@ const routes: Routes = [
     { path: "sizes", component: SizeItemComponent },
     { path: "categories", component: ViewCategoriesComponent },
     { path: "add-category", component: AddCategoryComponent },
+    { path: "signup", component: SignupComponent},
   ]},
 
 

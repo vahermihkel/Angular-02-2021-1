@@ -1,5 +1,6 @@
 export class Item {
   constructor(
+    public id: number,
     public title: string, // string - "dasdas" NIMI
     public price: number, // 12.2131
     public imgSrc: string, // boolean - true/false

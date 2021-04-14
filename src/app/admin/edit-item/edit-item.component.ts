@@ -36,13 +36,6 @@ export class EditItemComponent implements OnInit {
       }
     })
 
-
-
-
-
-
-
-
     this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
       for (const key in categoriesFromFb) {
         const element = categoriesFromFb[key];
@@ -52,7 +45,10 @@ export class EditItemComponent implements OnInit {
 
     this.sizes = this.sizeService.sizes;
     this.itemId = (Number)(this.route.snapshot.paramMap.get("itemId"));
-    this.item = this.itemService.itemsInService[this.itemId];
+    let item = this.itemService.itemsInService.find(item=>item.id==this.itemId);
+    if (item) {
+      this.item = item;
+    }
 
     if (this.item.size) {
       this.itemSizes = this.item.size;
@@ -62,6 +58,7 @@ export class EditItemComponent implements OnInit {
     }
    
     this.itemEditForm = new FormGroup({
+      id: new FormControl(this.item.id),
       title: new FormControl(this.item.title),
       price: new FormControl(this.item.price),
       imgSrc: new FormControl(this.item.imgSrc),
@@ -87,6 +84,7 @@ export class EditItemComponent implements OnInit {
   onSubmit(form: FormGroup) {
     if (form.valid) {
       this.itemService.itemsInService[this.itemId] = new Item(
+          form.value.id,
           form.value.title, 
           form.value.price, 
           form.value.imgSrc,

@@ -26,12 +26,15 @@ export class ViewItemsComponent implements OnInit {
     })
   }
 
-  onDeleteItem(i: number) {
+  onDeleteItem(id: number) {
     let isConfirm = confirm(this.translate.instant("Kas kustutad?"));
     if (isConfirm) {
-      this.itemService.itemsInService.splice(i,1);
-      this.items.splice(i,1);
-      this.itemService.saveItemsToDatabase().subscribe();
+      let i = this.itemService.itemsInService.findIndex(item=>item.id==id);
+      if (i) {
+        this.itemService.itemsInService.splice(i,1);
+        this.items.splice(i,1);
+        this.itemService.saveItemsToDatabase().subscribe();
+      }
     }
   }
 

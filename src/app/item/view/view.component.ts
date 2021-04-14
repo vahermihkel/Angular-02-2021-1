@@ -13,6 +13,7 @@ import { ItemService } from 'src/app/services/item.service';
 export class ViewComponent implements OnInit {
   item!: Item;
   cartSize: string = "";
+  isLoading = false;
 
   // KÕIGEPEALT: saame numbri URLi seest kätte (ActivatedRoute constructorisse)
   // Selle abil saame õige eseme Servicest kätte (ItemService constuctorisse)
@@ -25,26 +26,20 @@ export class ViewComponent implements OnInit {
     private cookieService: CookieService) { }
 
   ngOnInit(): void {
-
+    this.isLoading = true;
     this.itemService.getItemsFromDatabase().subscribe(items => {
       this.itemService.itemsInService = [];
       for (const key in items) {
           const element = items[key];
           this.itemService.itemsInService.push(element);
       }
-
       let id = Number(this.route.snapshot.paramMap.get('itemId'));
-      this.item = this.itemService.itemsInService[id];
-
-
+      let item = this.itemService.itemsInService.find(item=>item.id == id);
+      if (item) {
+        this.item = item;
+      }
+      this.isLoading = false;
     })
-
-
-
-    
-    // console.log(this.route.snapshot.paramMap);
-    // console.log(id);
-    // console.log(this.item);
   }
 
   // Numbrist stringiks: 12.toString()     123123.toLocaleString('fr')
@@ -54,7 +49,7 @@ export class ViewComponent implements OnInit {
     // {title: "PEALKIRI", price: 50, ...}
     // [{title: "PEALKIRI", price: 49, ...},{title: "PEALKIRI", price: 50, ...},{title: "MUU", price: 50, ...}]
     let i = this.cartService.cartItems.findIndex(cartItem => 
-      item.title == cartItem.cartItem.title && this.cartSize == cartItem.cartSize)
+      item.id == cartItem.cartItem.id && this.cartSize == cartItem.cartSize)
     if (i != -1) {
       if (this.cartService.cartItems[i].count == 1) {
         this.cartService.cartItems.splice(i,1);
@@ -67,11 +62,11 @@ export class ViewComponent implements OnInit {
   }
 
   onAddToCart(item: Item) {
-    if (this.cartSize == "") {
+    if (this.cartSize == "" && item.size) {
       return;
     }
     let i = this.cartService.cartItems.findIndex(
-        cartItem => item.title == cartItem.cartItem.title && this.cartSize == cartItem.cartSize)
+        cartItem => item.id == cartItem.cartItem.id && this.cartSize == cartItem.cartSize)
     if (i != -1) {
       this.cartService.cartItems[i].count += 1;
     } else {

@@ -1,6 +1,8 @@
 <button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
 
 <form (ngSubmit)="onSubmit(addItemForm)" #addItemForm="ngForm">
+    <label>Id</label><br>
+    <input type="text" pattern="\d*" ngModel name="id" placeholder="Toote id" required minlength="8" maxlength="8"><br>
     <label>Nimetus</label><br>
     <input type="text" ngModel name="title" placeholder="Toote nimetus" required maxlength="30"><br>
     <label>Pilt</label><br>

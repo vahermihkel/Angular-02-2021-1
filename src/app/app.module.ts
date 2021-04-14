@@ -53,7 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminModule,
     ItemModule
   ],
-  providers: [UniqueCategoryPipe, CookieService],
+  providers: [UniqueCategoryPipe, ShowActiveItemsPipe, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,8 +16,13 @@ export class ItemService {
 
   // Asendab andmebaasis kõik ära selle väärtusega mis kaasa anname
   saveItemsToDatabase() {
+    // return this.http.put(this.url, this.itemsInService.map(item => ({...item, country: EU})));
     return this.http.put(this.url, this.itemsInService);
   }
+
+  // getRandomNumber() {
+  //   return Math.floor(Math.random() * (99999999 - 10000000) + 10000000);
+  // }
 
   // Võtab kõik andmebaasist - by default tüüp on tal Object. <TÜÜP> anname oma tüübi
   getItemsFromDatabase() {

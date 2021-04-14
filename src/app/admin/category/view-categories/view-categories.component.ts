@@ -19,7 +19,6 @@ export class ViewCategoriesComponent implements OnInit {
           const element = categoriesFromFb[key];
           this.categories.push({id: key, categoryName: element.categoryName});
       }
-      console.log("VÕTAN SERVICE_ST")
     });
   }
 

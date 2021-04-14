@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
     // {title: "PEALKIRI", price: 50, ...}
     // [{title: "PEALKIRI", price: 49, ...},{title: "PEALKIRI", price: 50, ...},{title: "MUU", price: 50, ...}]
     let i = this.cartService.cartItems.findIndex(cartItem => 
-      item.cartItem.title == cartItem.cartItem.title && cartItem.cartSize == item.cartSize)
+      item.cartItem.id == cartItem.cartItem.id && cartItem.cartSize == item.cartSize)
     if (i != -1) {
       if (this.cartService.cartItems[i].count == 1) {
         this.cartService.cartItems.splice(i,1);
@@ -47,7 +47,7 @@ export class CartComponent implements OnInit {
 
   onAddToCart(item: any) {
     let i = this.cartService.cartItems.findIndex(cartItem => 
-      item.cartItem.title == cartItem.cartItem.title && cartItem.cartSize == item.cartSize)
+      item.cartItem.id == cartItem.cartItem.id && cartItem.cartSize == item.cartSize)
     if (i != -1) {
       this.cartService.cartItems[i].count += 1;
     } 

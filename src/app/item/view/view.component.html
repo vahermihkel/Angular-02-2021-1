@@ -13,8 +13,11 @@
       <div class="add-to-cart-button">
         <span (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>
         <span>___</span>
-        <span [ngClass]="{'size-not-selected': cartSize == ''}" (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
+        <span [ngClass]="{'size-not-selected': cartSize == '' && item.size}" (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="!item && !isLoading">
+  Eset ei leitud!
 </div>

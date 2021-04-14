@@ -2,8 +2,8 @@
   <img class="logo" routerLink="/" src="assets\webshio.png">
   <button *ngIf="isLoggedIn" routerLink="admin">Admini vaade</button>
   <button *ngIf="isLoggedIn" (click)="onLogout()">Logi välja</button>
-  <button *ngIf="!isLoggedIn" routerLink="login">Logi sisse</button>
-  <button *ngIf="!isLoggedIn" routerLink="signup">Registreeru</button>
+  <!-- <button *ngIf="!isLoggedIn" routerLink="login">Logi sisse</button>
+  <button *ngIf="!isLoggedIn" routerLink="signup">Registreeru</button> -->
   <div>
     <img class="lang-1" (click)="useLanguage('ee')" src="assets/i18n/ee.png">
     <img class="lang-2" (click)="useLanguage('en')" src="assets/i18n/en.png">

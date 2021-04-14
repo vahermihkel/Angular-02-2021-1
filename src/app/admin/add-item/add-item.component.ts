@@ -49,10 +49,10 @@ export class AddItemComponent implements OnInit {
   // vajutatakse "39"  -   itemSizes = ["39"]
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
     if (form.valid) {
       let formValue = form.value;
       let item = new Item(
+        formValue.id,
         formValue.title, 
         formValue.price, 
         formValue.imgSrc,

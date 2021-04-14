@@ -22,14 +22,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     let cartValue = this.cookieService.get('cart');
-    // console.log(cartValue);
-    // console.log(JSON.parse(cartValue));
     if (cartValue != "") {
       this.cartService.cartItems = JSON.parse(cartValue);
     }
     this.sumOfCart = 0;
     this.cartService.cartItems.forEach(item => {
-      // this.sumOfCart = this.sumOfCart + item.price;
       this.sumOfCart += item.cartItem.price * item.count;
     });
 

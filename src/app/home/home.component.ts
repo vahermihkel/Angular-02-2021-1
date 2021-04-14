@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { CheckAuthService } from '../auth/check-auth.service';
 import { Item } from '../models/item.model';
 import { UniqueCategoryPipe } from '../pipes/unique-category.pipe';
 import { ItemService } from '../services/item.service';
+import { ShowActiveItemsPipe } from './show-active-items.pipe';
 
 @Component({
   selector: 'app-home',
@@ -14,19 +16,21 @@ export class HomeComponent implements OnInit {
   itemsShown: Item[] = [];
   titleSortNumber = 0;
   priceSortNumber = 0;
-  itemCategories!: {category: string, isSelected: boolean}[];
+  itemCategories: {category: string, isSelected: boolean}[] = [];
   isLoading = false;
   isLoggedIn = false;
-  // kuupaev = new Date();
 
   constructor(private itemService: ItemService,
     private uniqueCategoryPipe: UniqueCategoryPipe,
-    private checkAuth: CheckAuthService) { }
+    private checkAuth: CheckAuthService,
+    private showActiveItemsPipe: ShowActiveItemsPipe,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.checkAuth.autologin();
     this.checkAuth.loggedIn.subscribe(logged => {
       this.isLoggedIn = logged;
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
     });
     this.isLoggedIn = this.checkAuth.isLoggedIn();
     this.isLoading = true;
@@ -38,19 +42,28 @@ export class HomeComponent implements OnInit {
           this.itemsOriginal.push(element);
           this.itemService.itemsInService.push(element);
       }
-      this.itemsShown = this.itemsOriginal.slice();
-  //    [{title: "PEALKIRI", price: 49, category: "shoes"},{title: "PEALKIRI", price: 50, ...},{title: "MUU", price: 50, ...}]
-  // ["shoes","beer", "car"]
-  // [{category: "shoes", isSelected: true},{category: "beer", isSelected: true}, "car"]
-      this.itemCategories = this.uniqueCategoryPipe.transform(this.itemsOriginal).map(itemCategory => {
-        return {category: itemCategory, isSelected: true}
-      });
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
+     
+      if (this.cookieService.get("categories") != "") {
+        let itemCategories = JSON.parse(this.cookieService.get("categories"));
+        this.itemCategories = this.uniqueCategoryPipe.transform(this.itemsOriginal).map((itemCategory,i) => {
+          return {category: itemCategory, isSelected: 
+            (itemCategories[i] && itemCategory==itemCategories[i].category)  ? itemCategories[i].isSelected : true}
+        });
+      } else {
+        this.itemCategories = this.uniqueCategoryPipe.transform(this.itemsOriginal).map(itemCategory => {
+          return {category: itemCategory, isSelected: true}
+        });
+      }
       this.isLoading = false;
+      this.onSelectCategory(-2);
     })
   }
 
   onSelectCategory(index: number) {
-    this.itemCategories[index].isSelected = !this.itemCategories[index].isSelected;
+    if (index != -2) {
+      this.itemCategories[index].isSelected = !this.itemCategories[index].isSelected;
+    } 
     this.itemsShown = this.itemsOriginal.filter(item=>{
       let category = this.itemCategories.find(itemCategory => {
           return item.category == itemCategory.category;
@@ -61,6 +74,8 @@ export class HomeComponent implements OnInit {
         return null;
       }
     })
+    this.cookieService.set('categories',JSON.stringify(this.itemCategories));
+    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
     // this.itemsShown = this.itemsOriginal
   }
   
@@ -82,9 +97,10 @@ export class HomeComponent implements OnInit {
       this.titleSortNumber = 2;
     } else {
       this.itemsShown = this.itemService.itemsInService.slice();
+      this.onSelectCategory(-2);
       this.titleSortNumber = 0;
     }
-    
+    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
   }
 
   onSortPrice() {
@@ -96,8 +112,10 @@ export class HomeComponent implements OnInit {
       this.priceSortNumber = 2;
     } else {
       this.itemsShown = this.itemService.itemsInService.slice();
+      this.onSelectCategory(-2);
       this.priceSortNumber = 0;
     }
+    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
   }
 
   

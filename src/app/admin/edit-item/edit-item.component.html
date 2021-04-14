@@ -1,6 +1,8 @@
-<button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
+<button class="main-button back" routerLink="/admin/items">{{'Tagasi' | translate}}</button>
 
 <form *ngIf="itemEditForm" (ngSubmit)="onSubmit(itemEditForm)" [formGroup]="itemEditForm">
+    <label>Id</label><br>
+    <input type="text" pattern="\d*" minlength="8" maxlength="8" type="number" formControlName="id" placeholder="Toote id" required><br>
     <label>Nimetus</label><br>
     <input type="text" formControlName="title" placeholder="Toote nimetus" required><br>
     <label>Pilt</label><br>
