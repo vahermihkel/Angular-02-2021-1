@@ -83,7 +83,8 @@ export class EditItemComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     if (form.valid) {
-      this.itemService.itemsInService[this.itemId] = new Item(
+      let i = this.itemService.itemsInService.findIndex(item=>item.id==this.itemId)
+      this.itemService.itemsInService[i] = new Item(
           form.value.id,
           form.value.title, 
           form.value.price, 
@@ -93,7 +94,8 @@ export class EditItemComponent implements OnInit {
           form.value.producer,
           form.value.description,
           form.value.isActive,
-          this.itemSizes);
+          this.itemSizes,
+          0);
       this.itemService.saveItemsToDatabase().subscribe(() =>
         this.router.navigateByUrl("/admin/items")
       );

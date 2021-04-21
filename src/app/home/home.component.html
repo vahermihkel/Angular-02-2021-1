@@ -17,6 +17,7 @@
     <div class="filter-name">{{'Järjesta:' | translate  }}</div>
     <div class="filter-value price" (click)="onSortTitle()">{{'Tähestiku järgi' | translate}}</div>
     <div class="filter-value title" (click)="onSortPrice()">Hinna järgi</div>
+    <div>_______  {{ itemsShown.length }}</div>
   </div>
 
   <div class="items-wrapper">
@@ -25,6 +26,7 @@
       *ngFor="let itemShown of itemsShown; let i = index"
       [item]="itemShown"
       [i]="i"
+      [isSmaller]="'fromHome'"
       (itemActiveChanged)="itemActiveChange($event)"
       >
       

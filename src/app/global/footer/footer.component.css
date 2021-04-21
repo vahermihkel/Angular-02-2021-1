@@ -5,5 +5,16 @@
   left: 0;
   right: 0;
   margin-bottom: -100px;
-  background-color: darkgrey;
+  background-color: rgb(255, 255, 255);
+  border-top: 1px solid gray;
+  display: flex;
+  justify-content: space-around ;
+}
+
+.my-info {
+  display: flex;
+}
+
+.my-info div {
+  margin: 0 10px;
 }

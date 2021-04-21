@@ -13,6 +13,7 @@ export class ItemCardComponent implements OnInit {
   @Input() item!: Item;
   @Input() i!: number;
   @Output() itemActiveChanged = new EventEmitter(); 
+  @Input() isSmaller!: string;
   isLoggedIn = false;
 
   constructor(private cartService: CartService,

@@ -13,3 +13,7 @@
   </div> -->
 <div class="item-title">{{ item.title | translate | shortenTitle }}</div>
 <div class="item-price">{{ item.price | thousandSeparator }} €</div>
+
+<!-- <div *ngIf="isSmaller == 'fromHome'">TAHAN NÄIDATA</div>
+<div *ngIf="isSmaller == 'fromAdmin'">TAHAN TEISES NÄIDATA</div>
+<img [ngClass]="{'smaller-class-for-picture': isSmaller == 'fromHome', 'larger-class': isSmaller == 'fromAdmin'}" src="" alt=""> -->

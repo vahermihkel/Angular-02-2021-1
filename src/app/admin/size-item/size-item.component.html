@@ -1,7 +1,7 @@
 <label>Lisa uus suurus</label><br>
 <!-- two way binding -->
 <input type="text" [(ngModel)]="size"><br>
-<button (click)="onAddSize()">Sisesta</button><br>
+<button [disabled]="size == ''" (click)="onAddSize()">Sisesta</button><br>
 
 <!-- {{ size }} -->
 
@@ -17,5 +17,5 @@ two way binding
 
 
 <span *ngFor="let size of sizes; let i = index">
-  <div>{{size}}</div><button (click)="onDeleteSize(i)">X</button>
+  <div>{{size.sizeName}}</div><button (click)="onDeleteSize(i)">X</button>
 </span><br>

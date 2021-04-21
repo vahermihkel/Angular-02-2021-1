@@ -9,6 +9,8 @@
       <option [value]="size" *ngFor="let size of item.size">{{ size }}</option>
     </select>
 
+    <div>Ostukorvis: {{ item.count }}</div>
+
     <div class="add-to-cart-button-wrapper">
       <div class="add-to-cart-button">
         <span (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>

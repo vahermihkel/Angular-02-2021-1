@@ -61,7 +61,8 @@ export class AddItemComponent implements OnInit {
         formValue.producer,
         formValue.description,
         true,
-        this.itemSizes);
+        this.itemSizes,
+        0);
       // this.itemService.itemsInService.push(item);
       this.itemService.addItemToDatabase(item).subscribe(()=>
         this.router.navigateByUrl("/admin/items")

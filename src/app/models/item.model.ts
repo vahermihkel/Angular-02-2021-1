@@ -9,7 +9,8 @@ export class Item {
     public producer: string,
     public description: string, // "See toode on bla"
     public isActive: boolean, // true
-    public size: string[] // ["38", "40"...]
+    public size: string[], // ["38", "40"...]
+    public count: number
   ) {}
 
   // getTitle() {

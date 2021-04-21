@@ -8,18 +8,26 @@ import { SizeService } from './size.service';
   styleUrls: ['./size-item.component.css']
 })
 export class SizeItemComponent implements OnInit {
-  sizes: string[] = [];
+  sizes: {id: string, sizeName: string}[] = [];
   size: string = "";
 
   constructor(private sizeService: SizeService) { }
 
   ngOnInit(): void {
-    this.sizes = this.sizeService.sizes;
+    this.sizeService.getSizesFromDatabase().subscribe(sizesFromFb => {
+      for (const key in sizesFromFb) {
+          const element = sizesFromFb[key];
+          this.sizes.push({id: key, sizeName: element.sizeName});
+      }
+    });
   }
 
   onAddSize() {
-    this.sizeService.sizes.push(this.size);
-    this.size = "";
+    if (this.size != "") {
+      this.sizeService.addSizeToDatabase({sizeName: this.size}).subscribe();
+      this.sizes.push({id: this.sizes.length.toString(), sizeName: this.size});
+      this.size = "";
+    }
   }
 
   // onSubmit(form: NgForm) {
@@ -29,7 +37,8 @@ export class SizeItemComponent implements OnInit {
   // }
 
   onDeleteSize(i: number) {
-    this.sizeService.sizes.splice(i,1);
+    this.sizes.splice(i,1);
+    this.sizeService.deleteFromDatabase(this.sizes).subscribe();
   }
 
 }

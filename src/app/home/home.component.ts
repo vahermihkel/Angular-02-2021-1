@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   itemCategories: {category: string, isSelected: boolean}[] = [];
   isLoading = false;
   isLoggedIn = false;
+  cartItems: { cartItem: Item, count: number}[] = [];
 
   constructor(private itemService: ItemService,
     private uniqueCategoryPipe: UniqueCategoryPipe,
@@ -28,10 +29,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAuth.autologin();
+    
     this.checkAuth.loggedIn.subscribe(logged => {
       this.isLoggedIn = logged;
       this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
     });
+
     this.isLoggedIn = this.checkAuth.isLoggedIn();
     this.isLoading = true;
     this.itemService.getItemsFromDatabase().subscribe(itemsFromFirebase => {
@@ -42,7 +45,6 @@ export class HomeComponent implements OnInit {
           this.itemsOriginal.push(element);
           this.itemService.itemsInService.push(element);
       }
-      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
      
       if (this.cookieService.get("categories") != "") {
         let itemCategories = JSON.parse(this.cookieService.get("categories"));
@@ -56,7 +58,25 @@ export class HomeComponent implements OnInit {
         });
       }
       this.isLoading = false;
+
+      let cookieValue = this.cookieService.get('cart');
+      if (cookieValue) {
+        this.cartItems = JSON.parse(cookieValue) ?? [];
+      }
+
+        // map    Item   ---> cartItem: Item, {count: 3}    // {"item":{"barcode":"12345672","category":"tools","imgSrc":"https://i.ebayimg.com/thumbs/images/g/j0kAAOSwOJVetTCG/s-l225.webp","isActive":true,"price":8.19,"title":"45in1 Screwdriver Bit Set Multifunctional Computer Mobile Phone Repair Tool Kit"},"count":3}
+      this.itemsOriginal = this.itemsOriginal.map(obj => {
+          const index = this.cartItems.findIndex(el => el.cartItem.id == obj.id);
+          const { count } = index !== -1 ? this.cartItems[index] : { count: 0 };
+          return {
+            ...obj,
+            count
+          };
+      })
+      console.log(this.itemsOriginal);
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
       this.onSelectCategory(-2);
+
     })
   }
 
